@@ -1,0 +1,100 @@
+swagger: '2.0'
+info:
+  title: Node.js CRUD API
+  description: API documentation for CRUD operations using Swagger in Node.js
+  version: '1.0.0'
+basePath: /
+
+paths:
+  /items:
+    get:
+      description: Get all items
+      responses:
+        200:
+          description: List of items
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+    post:
+      description: Create a new item
+      parameters:
+        - name: name
+          in: body
+          required: true
+          type: string
+          description: The name of the item
+      responses:
+        201:
+          description: Item created
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+  /items/{id}:
+    get:
+      description: Get an item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the item
+      responses:
+        200:
+          description: A single item
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        404:
+          description: Item not found
+    put:
+      description: Update an item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the item
+        - name: name
+          in: body
+          required: true
+          type: string
+          description: The new name for the item
+      responses:
+        200:
+          description: Item updated
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+        404:
+          description: Item not found
+    delete:
+      description: Delete an item by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          description: The ID of the item
+      responses:
+        200:
+          description: Item deleted
+        404:
+          description: Item not found
